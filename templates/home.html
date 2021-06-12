@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ML Calihouse</title>
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/4a822b1d6a.js"></script>
+</head>
+<body>
+    <div class="container" text-align = "center">
+
+    <h3>Roughness Prediction</h3>
+    <form 
+    action='http://localhost:5000/predictform'
+    method='POST'>
+        
+        <!-- row 1 -->
+        <div class='row'>
+            <!-- input medinc -->
+            <div class="input-field col s3">
+                <input class='validate' id='LT Layer Thickness' 
+                name='LT Layer Thickness' type='text'>
+                <label for='LT Layer Thickness'>LT Layer Thickness...</label>
+            </div>
+            <!-- input houseage -->
+            <div class="input-field col s3">
+                <input class='validate' id='AS2 Pressure' 
+                name='AS2 Pressure' type='text'>
+                <label for='AS2 Pressure'>AS2 Pressure...</label>
+            </div>
+            <!-- input averooms -->
+            <div class="input-field col s3">
+                <input class='validate' id='GT' 
+                name='GT' type='text'>
+                <label for='GT'>GT...</label>
+            </div>
+            <!-- input avebedrms -->
+            <div class="input-field col s3">
+                <input class='validate' id='AT' 
+                name='AT' type='text'>
+                <label for='AT'>AT...</label>
+            </div>
+        </div>
+        
+        <!-- row 2 -->
+        <div class='row'>
+            <!-- input population -->
+            <div class="input-field col s3">
+                <input class='validate' id='Annealing time' 
+                name='Annealing time' type='text'>
+                <label for='Annealing time'>Annealing time...</label>
+            </div>
+            <!-- input aveoccup -->
+            <div class="input-field col s3">
+                <input class='validate' id='Intended Thickness' 
+                name='Intended Thickness' type='text'>
+                <label for='Intended Thickness'>Intended Thickness..</label>
+            </div>
+     
+            </div>
+        </div>
+        
+        <!-- row 3 -->
+        <center class='row'>
+            <button class='btn waves-effect waves-light' 
+            type='submit'>
+                PREDICT
+                &nbsp;
+                <i class="fas fa-hat-wizard"></i>
+            </button>
+        </center>
+        
+    </form>
+
+    <div>The prediction is {{prediction_text}}</div>
+
+    </div>
+</body>
+</html>
