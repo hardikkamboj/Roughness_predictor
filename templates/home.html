@@ -8,7 +8,7 @@ PREDICTION MODEL
     <h1> Prediction Model</h1>
     <h2>Thanks for visiting our website for cross-validation of the model</h2>
     <div class="row">
-        <form class="form-horizontal" name="data" action='http://localhost:5000/predictform'
+        <form class="form-horizontal" name="data"
         method='POST' onsubmit="return terify();">
           <div>1.Please choose the layer you want to grow:
             <input type="radio" name="data1" id="data1" value="GaAs">GaAs layer
@@ -47,9 +47,13 @@ PREDICTION MODEL
         </form>
         <div>Prediction Result:
           <span id="result"></span>
-        </div>
+        </div><br>
       </div>
-      <div>The prediction is {{prediction_text}}</div>
+      <div>
+        {% for item in result %}
+        {{ item }} : {{result[item][0]}} <br>
+        {% endfor %}
+      </div>
 
     </div>
 </body>
