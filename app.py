@@ -16,8 +16,22 @@ def get_prediction(lt_layer,as2_pressure,GT,AT,annealing_time,intended_thickness
     
     return dict(roughness = roughness, fwhm = fwhm, twinning = twinning, fe_intensity = fe_intensity, thickness = thickness)
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        body = request.form
+        
+        layer_type = body['data1']
+        intended_thickness = float(body['data2'])
+        lt_thickness = float(body['data3'])
+        as2_pressure = float(body['data4'])
+        at= float(body['data5'])
+        gt = float(body['data6'])
+        annealing_time = float(body['data7'])
+        # model prediction
+        result = get_prediction(lt_thickness,as2_pressure,gt,at,annealing_time,intended_thickness)
+        return render_template('home.html', result=result)
+        # return render_template('result.html', body=body)
     return render_template('home.html')
 
 @app.route('/predict', methods = ['GET', 'POST'])
@@ -46,22 +60,22 @@ def predict():
             'status': 'Anda tidak nge-POST & nge-GET'
         })
 
-@app.route('/predictform', methods = ['POST', 'GET'])
-def predictform():
-    if request.method == 'POST':
-        body = request.json
-
-        layer_type = body['data1']
-        intended_thickness = float(body['data2'])
-        lt_thickness = float(body['data3'])
-        as2_pressure = float(body['data4'])
-        at= float(body['data5'])
-        gt = float(body['data6'])
-        annealing_time = float(body['data7'])
-        # model prediction
-        result = get_prediction(lt_thickness,as2_pressure,gt,at,annealing_time,intended_thickness)
-        return render_template('home.html', prediction_text='Predicted value of Roughness {}'.format(result))
-        # return render_template('result.html', body=body)
+# @app.route('/predictform', methods = ['POST', 'GET'])
+# def predictform():
+    # if request.method == 'POST':
+    #     body = request.form
+        
+    #     layer_type = body['data1']
+    #     intended_thickness = float(body['data2'])
+    #     lt_thickness = float(body['data3'])
+    #     as2_pressure = float(body['data4'])
+    #     at= float(body['data5'])
+    #     gt = float(body['data6'])
+    #     annealing_time = float(body['data7'])
+    #     # model prediction
+    #     result = get_prediction(lt_thickness,as2_pressure,gt,at,annealing_time,intended_thickness)
+    #     return render_template('home.html', prediction_text='Predicted value of Roughness {}'.format(result['roughness']))
+    #     # return render_template('result.html', body=body)
 
 
 if __name__ == '__main__':
